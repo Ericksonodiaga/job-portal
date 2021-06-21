@@ -15,10 +15,7 @@ from django.utils import timezone
 
 
 def get_success_url(request):
-    """
-    Handle Success Url After LogIN
-
-    """
+   
     if 'next' in request.GET and request.GET['next'] != '':
         return request.GET['next']
     else:
@@ -26,10 +23,7 @@ def get_success_url(request):
 
 
 def employee_registration(request):
-    """
-    Handle Employee Registration
-
-    """
+   
     form = EmployeeRegistrationForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form = form.save()
@@ -42,10 +36,7 @@ def employee_registration(request):
 
 
 def employer_registration(request):
-    """
-    Handle Employee Registration
-
-    """
+    
 
     form = EmployerRegistrationForm(request.POST or None)
     if form.is_valid():
@@ -62,10 +53,7 @@ def employer_registration(request):
 @login_required(login_url=reverse_lazy('accounts:login'))
 @user_is_employee
 def employee_edit_profile(request, id=id):
-    """
-    Handle Employee Profile Update Functionality
-
-    """
+   
     if request.method == "POST":
         form = EmployeeProfileEditForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
@@ -90,10 +78,7 @@ def employee_edit_profile(request, id=id):
 
 
 def user_logIn(request):
-    """
-    Provides users to logIn
-
-    """
+    
 
     form = UserLoginForm(request.POST or None)
 
@@ -113,9 +98,7 @@ def user_logIn(request):
 
 
 def user_logOut(request):
-    """
-    Provide the ability to logout
-    """
+   
     auth.logout(request)
     messages.success(request, 'You are Successfully logged out')
     return redirect('accounts:login')
