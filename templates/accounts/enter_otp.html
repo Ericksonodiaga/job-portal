@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- HOME -->
+    <section class="section-hero overlay inner-page bg-image"
+             style="background-image: url('{% static 'images/hero_1.jpg' %}');" id="home-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1 class="text-black font-weight-bold">Enter OTP</h1>
+                    <div class="custom-breadcrumbs">
+                        <a href="{% url 'jobosoft:home' %}">Home</a> <span class="mx-2 slash">/</span>
+                        <span class="text-white"><strong>Enter OTP</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="site-section">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-12 mb-5">
+
+                    {% include 'messages.html' %}
+
+                    <form method="POST" action="#" class="p-4 border rounded">
+                        {% csrf_token %}
+                        <div class="row form-group">
+                            <div class="col-md-12 mb-3 mb-md-0">
+
+                                <label class="text-black" for="id_otp">OTP: </label>
+                                <input type="text" class="form-control"
+                                       name="otp"
+                                       id="id_otp"
+                                       placeholder="Enter OTP code"
+                                       required
+                                >
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <input type="submit" value="Submit OTP" class="btn px-4 btn-primary text-white">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
