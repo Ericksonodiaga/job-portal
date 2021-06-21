@@ -62,9 +62,7 @@ def home_view(request):
 
 
 def job_list_View(request):
-    """
-
-    """
+    
     job_list = Job.objects.filter(is_published=True, is_closed=False).order_by('-timestamp')
     paginator = Paginator(job_list, 12)
     page_number = request.GET.get('page')
@@ -81,9 +79,7 @@ def job_list_View(request):
 @login_required(login_url=reverse_lazy('accounts:login'))
 @user_is_employer
 def create_job_View(request):
-    """
-    Provide the ability to create job post
-    """
+    
     form = JobForm(request.POST or None)
 
     user = get_object_or_404(User, id=request.user.id)
@@ -111,9 +107,7 @@ def create_job_View(request):
 
 
 def single_job_view(request, id):
-    """
-    Provide the ability to view job details
-    """
+    
 
     job = get_object_or_404(Job, id=id)
     related_job_list = job.tags.similar_objects()
@@ -132,10 +126,7 @@ def single_job_view(request, id):
 
 
 def search_result_view(request):
-    """
-        User can search job with multiple fields
-
-    """
+   
 
     job_list = Job.objects.order_by('-timestamp')
 
@@ -159,19 +150,7 @@ def search_result_view(request):
         if job_type:
             job_list = job_list.filter(job_type__iexact=job_type)
 
-    # job_title_or_company_name = request.GET.get('text')
-    # location = request.GET.get('location')
-    # job_type = request.GET.get('type')
-
-    #     job_list = Job.objects.all()
-    #     job_list = job_list.filter(
-    #         Q(job_type__iexact=job_type) |
-    #         Q(title__icontains=job_title_or_company_name) |
-    #         Q(location__icontains=location)
-    #     ).distinct()
-
-    # job_list = Job.objects.filter(job_type__iexact=job_type) | Job.objects.filter(
-    #     location__icontains=location) | Job.objects.filter(title__icontains=text) | Job.objects.filter(company_name__icontains=text)
+  
 
     paginator = Paginator(job_list, 10)
     page_number = request.GET.get('page')
@@ -228,8 +207,7 @@ def apply_job_view(request, id):
 
 @login_required(login_url=reverse_lazy('accounts:login'))
 def dashboard_view(request):
-    """
-    """
+   
     jobs = []
     savedjobs = []
     appliedjobs = []
@@ -358,10 +336,7 @@ def job_bookmark_view(request, id):
 @login_required(login_url=reverse_lazy('accounts:login'))
 @user_is_employer
 def job_edit_view(request, id=id):
-    """
-    Handle Employee Profile Update
-
-    """
+    
 
     job = get_object_or_404(Job, id=id)
     categories = Category.objects.all()
